@@ -7,11 +7,6 @@ function ExpenseTable() {
     // Fetch data initially
     fetchExpenses();
 
-    // Set an interval to refresh the data every 30 seconds (30000 milliseconds)
-    const intervalId = setInterval(fetchExpenses, 30000);
-
-    // Cleanup the interval when the component unmounts
-    return () => clearInterval(intervalId);
   }, []);
 
   const fetchExpenses = async () => {
