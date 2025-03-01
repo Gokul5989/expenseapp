@@ -26,7 +26,7 @@ const expenseSchema = new mongoose.Schema({
 const Expense = mongoose.model("Expense", expenseSchema);
 
 // Create expense
-app.post("/api/expenses", async (req, res) => {
+app.post("https://expenseapp-4.onrender.com/api/expenses", async (req, res) => {
   try {
     const newExpense = new Expense(req.body);
     await newExpense.save();
@@ -37,7 +37,7 @@ app.post("/api/expenses", async (req, res) => {
 });
 
 // Get all expenses
-app.get("/api/expenses", async (req, res) => {
+app.get("https://expenseapp-4.onrender.com/api/expenses", async (req, res) => {
   try {
     const expenses = await Expense.find();
     res.json(expenses);
@@ -47,7 +47,7 @@ app.get("/api/expenses", async (req, res) => {
 });
 
 // Update expense
-app.put("/api/expenses/:id", async (req, res) => {
+app.put("https://expenseapp-4.onrender.com/api/expenses/:id", async (req, res) => {
   try {
     const updatedExpense = await Expense.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updatedExpense);
@@ -57,7 +57,7 @@ app.put("/api/expenses/:id", async (req, res) => {
 });
 
 // Delete expense
-app.delete("/api/expenses/:id", async (req, res) => {
+app.delete("https://expenseapp-4.onrender.com/api/expenses/:id", async (req, res) => {
   try {
     await Expense.findByIdAndDelete(req.params.id);
     res.json({ message: "Expense deleted successfully" });
