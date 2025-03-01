@@ -1,51 +1,42 @@
-import { useState, useEffect } from "react";
-import "./ExpenseForm.css";
+import { useState, useEffect } from "react"
+import "./ExpenseForm.css"
 function ExpenseTable() {
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState([])
 
   useEffect(() => {
-    // Fetch data initially
-    fetchExpenses();
-
-  }, []);
+    fetchExpenses()
+  }, [])
 
   const fetchExpenses = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/expenses");
-      const data = await response.json();
-      setExpenses(data);
+      const response = await fetch("http://localhost:8080/api/expenses")
+      const data = await response.json()
+      setExpenses(data)
     } catch (error) {
-      console.error("Error fetching expenses:", error);
+      console.error("Error fetching expenses:", error)
     }
-  };
-
-  // Calculate total amount
- 
+  }
 
   return (
-    <div>
-      <table className="expense-table">
-        <thead>
-          <tr>
-            <th>Expense Name</th>
-            <th>Amount</th>
-            <th>Date</th>
+    <table className="expense-table">
+      <thead>
+        <tr>
+          <th>Expense Name</th>
+          <th>Amount</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {expenses.map((expense) => (
+          <tr key={expense._id}>
+            <td>{expense.name}</td>
+            <td>{expense.amount.toFixed(2)}</td>
+            <td>{new Date(expense.date).toLocaleDateString()}</td>
           </tr>
-        </thead>
-        <tbody>
-          {expenses.map((expense) => (
-            <tr key={expense._id}>
-              <td>{expense.name}</td>
-              <td>{expense.amount.toFixed(2)}</td>
-              <td>{new Date(expense.date).toLocaleDateString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      
-    </div>
-  );
+        ))}
+      </tbody>
+    </table>
+  )
 }
 
 export default ExpenseTable;
